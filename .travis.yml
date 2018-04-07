@@ -1,0 +1,61 @@
+# 어떤 언어를 사용할 지 정의 합니다.
+language: python
+
+# 사용할 파이썬 버전을 적어줍니다.
+python:
+  - "3.6"
+
+dist: trusty
+sudo: required
+env:
+  global:
+    - BUILD_ON_TRAVIS=true
+
+addons:
+  chrome: stable
+
+install:
+  - pip install -r requirements.txt
+
+
+#before_install:
+#  - pip install selenium
+#  - wget -O /tmp/chromedriver.zip https://chromedriver.storage.googleapis.com/2.5/chromedriver_linux64.zip && sudo unzip /tmp/chromedriver.zip chromedriver -d /usr/local/bin/
+#  - sudo chmod 777 /usr/local/bin/chromedriver
+
+
+before_script:
+#  - export DISPLAY=:99.0
+#  - sh -e /etc/init.d/xvfb start
+  - python manage.py makemigrations
+#  - nohup python manage.py runserver &
+
+script:
+#  - python functional_test.py
+  - python manage.py migrate
+  - python manage.py test lists
+  - zip -r latest *
+  - mkdir -p dpl_cd_upload
+  - mv latest.zip dpl_cd_upload/latest.zip
+
+deploy:
+  - provider: s3
+    access_key_id: $AWS_ACCESS_KEY
+    secret_access_key: $AWS_SECRET_KEY
+    local_dir: dpl_cd_upload
+    skip_cleanup: true
+    on: &2
+      repo: cionman/django_tdd
+    bucket: codedeploy-suwoni-codelab
+    region: ap-northeast-2
+  - provider: codedeploy
+    access_key_id: $AWS_ACCESS_KEY
+    secret_access_key: $AWS_SECRET_KEY
+    bucket: codedeploy-suwoni-codelab
+    key: latest.zip
+    bundle_type: zip
+    application: django_tdd
+    deployment_group: django_tdd
+    region: ap-northeast-2
+    on:
+        branch: master
