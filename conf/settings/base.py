@@ -18,6 +18,7 @@ INSTALLED_APPS = [
     'codelab',
     'til',
     'toy',
+    'accounts',
 ]
 
 MIDDLEWARE = [
