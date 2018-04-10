@@ -7,6 +7,11 @@ from .base import *
 SECRET_KEY = SETTING_DEV_DIC["SECRET_KEY"]
 DEBUG = True
 
+INSTALLED_APPS += [
+    # addon
+    'django_extensions',
+]
+
 ALLOWED_HOSTS = [
     "127.0.0.1",
     "localhost",
