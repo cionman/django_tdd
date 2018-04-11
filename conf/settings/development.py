@@ -11,6 +11,7 @@ DEBUG = True
 INSTALLED_APPS += [
     # addon
     'django_extensions',
+    'debug_toolbar',
 ]
 
 ALLOWED_HOSTS = [
@@ -25,3 +26,8 @@ DATABASES = {
     }
 }
 
+MIDDLEWARE += [
+    'debug_toolbar.middleware.DebugToolbarMiddleware',
+]
+
+INTERNAL_IPS = ['127.0.0.1']
