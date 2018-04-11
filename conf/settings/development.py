@@ -4,7 +4,8 @@ import os
 from conf.util import get_server_info_value
 from .base import *
 
-SECRET_KEY = SETTING_DEV_DIC["SECRET_KEY"]
+# dev SECRET_KEY 노출되어도 무방, 실서버와는 다름
+SECRET_KEY = "buq*!eias((btkx11b689964cs7-at1gw%k^!oypi^1357f6@"
 DEBUG = True
 
 INSTALLED_APPS += [
@@ -18,6 +19,9 @@ ALLOWED_HOSTS = [
 ]
 
 DATABASES = {
-    'default': SETTING_DEV_DIC['DATABASES']["default"]
+     'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+    }
 }
 

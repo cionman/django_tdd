@@ -4,8 +4,6 @@ import os
 from conf.util import get_server_info_value
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
-SETTING_DEV_DIC = get_server_info_value("development")
-SETTING_PRD_DIC = get_server_info_value("production")
 
 INSTALLED_APPS = [
     'django.contrib.admin',

@@ -10,12 +10,12 @@ sudo: required
 env:
   global:
     - BUILD_ON_TRAVIS=true
-
+    - DJANGO_SETTINGS_MODULE=conf.settings.development
 addons:
   chrome: stable
 
 install:
-  - pip install -r requirements.txt
+  - pip install -r requirements/requirements-dev.txt
 
 
 #before_install:
@@ -33,7 +33,7 @@ before_script:
 script:
 #  - python functional_test.py
   - python manage.py migrate
-  - python manage.py test lists
+  - python manage.py test
   - zip -r latest *
   - mkdir -p dpl_cd_upload
   - mv latest.zip dpl_cd_upload/latest.zip
