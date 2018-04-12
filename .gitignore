@@ -103,3 +103,5 @@ db.sqlite3
 .idea/
 
 server_info.json
+*.ipynb
+.ipynb_checkpoints/
