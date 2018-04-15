@@ -14,6 +14,7 @@ class Codelab(models.Model):
     isview = models.BooleanField(default=True)
     idate = models.DateTimeField(auto_now_add=True)
     mdate = models.DateTimeField(auto_now=True)
+    category = models.ForeignKey('CodelabCategory', null=True, on_delete=models.SET_NULL)
 
     class Meta:
         db_table = 'codelab'
@@ -40,3 +41,9 @@ class CodelabDetail(models.Model):
     def __str__(self):
         return '{} : {}'.format(self.id,
                                 self.contents)
+
+class CodelabCategory(models.Model):
+    category_name = models.CharField(max_length=50)
+
+    def __str__(self):
+        return self.category_name
