@@ -63,6 +63,6 @@
     
 ## 3. TODO
 
-- sentry 적용
+- ~~sentry 적용~~
 - MEDIA FILE 설정 실서버 Nginx 설정 바꿔주기
-- 
+- django_allauth 테스팅 작성해보기

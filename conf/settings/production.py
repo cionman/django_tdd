@@ -14,3 +14,11 @@ ALLOWED_HOSTS = [
 DATABASES = {
     'default': SETTING_PRD_DIC['DATABASES']["default"]
 }
+
+
+RAVEN_CONFIG = {
+    'dsn': SETTING_PRD_DIC["sentry"],
+    # If you are using git, you can also automatically configure the
+    # release based on the git info.
+    'release': VERSION,
+}

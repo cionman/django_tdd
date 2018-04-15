@@ -1,6 +1,8 @@
 ## 공통 설정
 import os
 
+import raven
+
 BASE_DIR = os.path.dirname(
     os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
@@ -19,6 +21,8 @@ INSTALLED_APPS = [
     'allauth.socialaccount.providers.google',
     'allauth.socialaccount.providers.facebook',
     'allauth.socialaccount.providers.github',
+    # sentry추가
+    'raven.contrib.django.raven_compat',
     # 추가 앱
     'codelab',
     'til',
@@ -131,3 +135,4 @@ SOCIALACCOUNT_PROVIDERS = {
 }
 
 SOCIALACCOUNT_ADAPTER = 'accounts.views.FacebookAccountAdapter'
+

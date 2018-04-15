@@ -5,6 +5,7 @@ pytz==2018.3
 selenium==3.11.0
 gunicorn==19.7.1
 django-allauth==0.35.0
+raven==6.6.0
 
 
 
