@@ -1,3 +1,9 @@
 from django.contrib import admin
 
-# Register your models here.
+from toy.models import Toy
+
+
+@admin.register(Toy)
+class ToyAdmin(admin.ModelAdmin):
+    pass
+

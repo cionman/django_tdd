@@ -1,3 +1,8 @@
 from django.contrib import admin
 
-# Register your models here.
+from til.models import Til
+
+
+@admin.register(Til)
+class TilAdmin(admin.ModelAdmin):
+    pass
