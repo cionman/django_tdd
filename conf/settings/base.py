@@ -94,6 +94,9 @@ USE_TZ = True
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.abspath(os.path.join(BASE_DIR, './static'))
 
+MEDIA_URL = '/media/'
+MEDIA_ROOT =  os.path.abspath(os.path.join(BASE_DIR, './media'))
+
 VERSION = '2018040701'
 
 AUTHENTICATION_BACKENDS = (
@@ -135,4 +138,3 @@ SOCIALACCOUNT_PROVIDERS = {
 }
 
 SOCIALACCOUNT_ADAPTER = 'accounts.views.FacebookAccountAdapter'
-
