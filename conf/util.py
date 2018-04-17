@@ -1,10 +1,13 @@
 import json
+from conf.settings.base import *
+
+
 
 
 def get_server_info_value(key: str):
     """서버 정보 취득"""
 
-    with open('server_info.json', mode='rt', encoding='utf-8') as file:
+    with open(BASE_DIR +'/server_info.json', mode='rt', encoding='utf-8') as file:
         data = json.load(file)
         for k, v in data.items():
             if k == key:
