@@ -24,7 +24,8 @@ urlpatterns = [
     path('', lambda r: render(r,'intro.html')),
     path('admin/', admin.site.urls),
     path('accounts/', include('accounts.urls')),
-    path('accounts/', include('allauth.urls'))
+    path('accounts/', include('allauth.urls')),
+    path('codelab/', include('codelab.urls')),
 ]
 
 
