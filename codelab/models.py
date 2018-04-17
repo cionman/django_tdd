@@ -24,6 +24,9 @@ class Codelab(models.Model):
     def __str__(self):
         return self.title
 
+    def get_absolute_url(self):
+        return reverse('codelab:codelab',kwargs={"pk", self.id})
+
 
 class CodelabDetail(models.Model):
     codelab = models.ForeignKey('Codelab',
@@ -43,6 +46,9 @@ class CodelabDetail(models.Model):
     def __str__(self):
         return '{} : {}'.format(self.id,
                                 self.contents)
+
+    def get_absolute_url(self):
+        return reverse('codelab:codelab_detail',kwargs={"slug", self.slug})
 
 
 class CodelabCategory(models.Model):
