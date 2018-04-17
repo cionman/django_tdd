@@ -8,13 +8,13 @@ class Codelab(models.Model):
     title = models.CharField(max_length=100)
     image = models.ImageField(upload_to='codelab/%Y/%m/%d'
                               , help_text='대표이미지를 선택해주세요.')
-    slug = models.SlugField(max_length=200, unique=True, allow_unicode=True)
     desc = models.CharField(max_length=200)
     favorite = models.IntegerField(default=0)
     isview = models.BooleanField(default=True)
     idate = models.DateTimeField(auto_now_add=True)
     mdate = models.DateTimeField(auto_now=True)
-    category = models.ForeignKey('CodelabCategory', null=True, on_delete=models.SET_NULL)
+    category = models.ForeignKey('CodelabCategory', null=True,
+                                 on_delete=models.SET_NULL)
 
     class Meta:
         db_table = 'codelab'
@@ -31,6 +31,7 @@ class CodelabDetail(models.Model):
                                 )
     title = models.CharField(max_length=100)
     contents = models.TextField()
+    slug = models.SlugField(max_length=200, unique=True, allow_unicode=True)
     idate = models.DateTimeField(auto_now_add=True)
     mdate = models.DateTimeField(auto_now=True)
 
@@ -41,6 +42,7 @@ class CodelabDetail(models.Model):
     def __str__(self):
         return '{} : {}'.format(self.id,
                                 self.contents)
+
 
 class CodelabCategory(models.Model):
     category_name = models.CharField(max_length=50)
