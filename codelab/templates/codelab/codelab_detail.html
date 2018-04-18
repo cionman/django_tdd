@@ -1,10 +1,12 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
-    codelab detail
-</body>
-</html>
+{% extends '../layout/layout.html' %}
+{% load static %}
+{% block customcss %}
+    <style>
+    h1{
+        text-align:center;
+    }
+    </style>
+{% endblock %}
+{% block contents %}
+<h1>Codelab Detail</h1>
+{% endblock %}

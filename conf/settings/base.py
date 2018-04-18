@@ -92,6 +92,9 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/2.0/howto/static-files/
 
 STATIC_URL = '/static/'
+STATICFILES_DIRS = [  # note 실제 디렉토리 경로
+    os.path.join(BASE_DIR, "assets"),
+]
 STATIC_ROOT = os.path.abspath(os.path.join(BASE_DIR, './static'))
 
 MEDIA_URL = '/media/'
