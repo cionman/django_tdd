@@ -1,6 +1,7 @@
 from django.urls import path
 from . import views
 
+app_name = 'codelab'
 
 urlpatterns = [
     path('', views.get_codelab_list, name='list'),

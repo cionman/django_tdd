@@ -1,10 +1,10 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
-    codelab_detail detail
-</body>
-</html>
+{% extends 'layout/layout.html' %}
+{% block contents %}
+    <pre>
+    codelab : {{ codelabdetail.codelab.user_name }}
+    title : {{ codelabdetail.title }}
+    contents : {{ codelabdetail.contents }}
+    slug : {{ codelabdetail.slug }}
+    idate : {{ codelabdetail.idate }}
+    </pre>
+{% endblock %}

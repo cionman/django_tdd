@@ -25,7 +25,7 @@ class Codelab(models.Model):
         return self.title
 
     def get_absolute_url(self):
-        return reverse('codelab:codelab',kwargs={"pk", self.id})
+        return reverse('codelab:codelab',args=[self.id])
 
 
 class CodelabDetail(models.Model):
@@ -48,7 +48,7 @@ class CodelabDetail(models.Model):
                                 self.contents)
 
     def get_absolute_url(self):
-        return reverse('codelab:codelab_detail',kwargs={"slug", self.slug})
+        return reverse('codelab:codelab_detail',args=[self.slug])
 
 
 class CodelabCategory(models.Model):

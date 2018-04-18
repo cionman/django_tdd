@@ -1,10 +1,14 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
-    codelab list
-</body>
-</html>
+{% extends 'layout/layout.html' %}
+{% block contents %}
+    {% for codelab in codelab_list %}
+        <div>
+            <pre>
+                title : {{ codelab.title }}
+                user_name : {{ codelab.user_name }}
+                user_email : {{ codelab.user_email }}
+                image : <img src="/media/{{ codelab.image }}"/>
+
+            </pre>
+        </div>
+    {% endfor %}
+{% endblock %}
