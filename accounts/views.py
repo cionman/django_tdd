@@ -25,15 +25,13 @@ def login(request):
 
 class AccountAdapter(DefaultSocialAccountAdapter):
 
-    def new_user(self, request, sociallogin):
-        return super().new_user(request, sociallogin)
+    def pre_social_login(self, request, sociallogin):
+        sociallogin.user.username = sociallogin.user.email
 
     def save_user(self, request, sociallogin, form=None):
         user = super().save_user(request, sociallogin, form)
         Profile(user=user).save()
         return user
 
-    def populate_user(self, request, sociallogin, data):
-        return super().populate_user(request, sociallogin, data)
 
 
