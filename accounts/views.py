@@ -23,7 +23,7 @@ def login(request):
                       extra_context={'providers': providers})
 
 
-class FacebookAccountAdapter(DefaultSocialAccountAdapter):
+class AccountAdapter(DefaultSocialAccountAdapter):
 
     def new_user(self, request, sociallogin):
         return super().new_user(request, sociallogin)

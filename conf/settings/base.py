@@ -142,6 +142,6 @@ SOCIALACCOUNT_PROVIDERS = {
     }
 }
 
-SOCIALACCOUNT_ADAPTER = 'accounts.views.FacebookAccountAdapter'
+SOCIALACCOUNT_ADAPTER = 'accounts.views.AccountAdapter'
 CONTENT_TYPES = ['image']
 MAX_UPLOAD_SIZE = 2621440
