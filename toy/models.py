@@ -3,8 +3,11 @@ from django.db import models
 
 class Toy(models.Model):
     title = models.CharField(max_length=100)
-    toy_image = models.ImageField(upload_to='toy/%Y/%m/%d', null=True, blank=True)
-    tech_stack = models.ManyToManyField('TechStack', related_name='toy_techstack_set', null=True, blank=True)
+    toy_image = models.ImageField(upload_to='toy/%Y/%m/%d', null=True,
+                                  blank=True)
+    tech_stack = models.ManyToManyField('TechStack',
+                                        related_name='toy_techstack_set',
+                                        null=True, blank=True)
     start_date = models.DateField()
     end_date = models.DateField(null=True, blank=True)
     desc = models.TextField()
