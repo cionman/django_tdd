@@ -66,4 +66,5 @@
 - ~~sentry 적용~~
 - ~~MEDIA FILE 설정 실서버 Nginx 설정 바꿔주기~~
 - django_allauth 테스팅 작성해보기
-- Codelab 목록, 작성, 수정, 삭제 기능 
+- Codelab 목록, 작성, 수정, 삭제 기능
+- 가입시 Username 지정 및 github 계정이 아닌경우 github 및 blog정보 얻기 
