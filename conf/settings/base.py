@@ -2,6 +2,7 @@
 import os
 
 import raven
+from django.urls import reverse_lazy
 
 BASE_DIR = os.path.dirname(
     os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
@@ -114,6 +115,7 @@ SITE_ID = 1
 ACCOUNT_EMAIL_VERIFICATION = 'none'
 
 LOGIN_REDIRECT_URL = '/'
+ACCOUNT_LOGOUT_REDIRECT_URL = reverse_lazy('accounts:login')
 
 
 SOCIALACCOUNT_PROVIDERS = {
