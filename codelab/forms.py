@@ -1,9 +1,10 @@
 from django import forms
 
 from codelab.models import CodelabDetail, Codelab
+from conf.forms import RestrictImageFileForm
 
 
-class CodelabForm(forms.ModelForm):
+class CodelabForm(RestrictImageFileForm):
     class Meta:
         model = Codelab
         fields = ['title', 'image', 'desc', 'isview']
