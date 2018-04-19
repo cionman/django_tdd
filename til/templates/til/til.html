@@ -1,0 +1,17 @@
+{% extends "layout/layout.html" %}
+{% block contents %}
+    <form action="" method="post">
+        {% csrf_token %}
+        <table>
+            {{ form.as_table }}
+        </table>
+            <input type="submit" />
+    </form>
+    <ul>
+        {% for til in til_list %}
+        <li>
+            {{ til.date }} : {{ til.contents }}
+        </li>
+        {% endfor %}
+    </ul>
+{% endblock %}

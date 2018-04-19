@@ -26,6 +26,7 @@ urlpatterns = [
     path('accounts/', include('accounts.urls')),
     path('accounts/', include('allauth.urls')),
     path('codelab/', include('codelab.urls')),
+    path('til/', include('til.urls')),
 ]
 
 
