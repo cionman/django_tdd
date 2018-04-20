@@ -29,6 +29,9 @@ class Codelab(models.Model):
 
 
 class CodelabDetail(models.Model):
+    user_id = models.CharField(max_length=50)
+    user_name = models.CharField(max_length=50)
+    user_email = models.EmailField(max_length=50)
     codelab = models.ForeignKey('Codelab',
                                 related_name='codelab_codelab_set',
                                 on_delete=models.PROTECT,
