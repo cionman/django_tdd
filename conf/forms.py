@@ -14,8 +14,8 @@ class RestrictImageFileForm(forms.ModelForm):
             if content._size > MAX_UPLOAD_SIZE:
                 raise forms.ValidationError(
                     ('최대 파일사이즈는 %s 입니다. 현재 파일사이즈는 %s 입니다.') % (
-                    filesizeformat(MAX_UPLOAD_SIZE),
-                    filesizeformat(content._size)))
+                        filesizeformat(MAX_UPLOAD_SIZE),
+                        filesizeformat(content._size)))
         else:
             raise forms.ValidationError(_('File type을 지원하지 않습니다.'))
         return content
@@ -26,4 +26,20 @@ class RestrictImageFileForm(forms.ModelForm):
                 self.check_image(key)
         return super().clean()
 
+
+class DefaultSetUserForm(forms.ModelForm):
+
+    class Meta:
+        fields = ['user_id', 'user_name', 'user_email']
+        widgets = {
+            'user_id': forms.HiddenInput,
+            'user_name': forms.HiddenInput,
+            'user_email': forms.HiddenInput,
+        }
+
+    def __init__(self, *args, **kwargs):
+        super(DefaultSetUserForm, self).__init__(*args, **kwargs)
+        self.fields['user_id'].required = False
+        self.fields['user_name'].required = False
+        self.fields['user_email'].required = False
 

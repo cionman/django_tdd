@@ -12,7 +12,12 @@ def is_check_writer(user):
 
 @method_decorator(user_passes_test(is_check_writer), name='dispatch')
 class WriterCreateView(CreateView):
-    pass
+    def post(self, request, *args, **kwargs):
+        request.POST = request.POST.copy() # immutable 해제
+        request.POST['user_id'] = request.user.id
+        request.POST['user_name'] = request.user.username
+        request.POST['user_email'] = request.user.email
+        return super().post(request, *args, **kwargs)
 
 
 @method_decorator(user_passes_test(is_check_writer), name='dispatch')
