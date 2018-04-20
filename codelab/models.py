@@ -1,19 +1,16 @@
 from django.db import models
 from django.urls import reverse
 
+from conf.models import CommonInfo
 
-class Codelab(models.Model):
-    user_id = models.CharField(max_length=50)
-    user_name = models.CharField(max_length=50)
-    user_email = models.EmailField(max_length=50)
+
+class Codelab(CommonInfo):
     title = models.CharField(max_length=100)
     image = models.ImageField(upload_to='codelab/%Y/%m/%d'
                               , help_text='대표이미지를 선택해주세요.')
     desc = models.CharField(max_length=200)
     favorite = models.IntegerField(default=0)
     isview = models.BooleanField(default=True)
-    idate = models.DateTimeField(auto_now_add=True)
-    mdate = models.DateTimeField(auto_now=True)
     category = models.ForeignKey('CodelabCategory', null=True,
                                  on_delete=models.SET_NULL)
 
@@ -28,10 +25,7 @@ class Codelab(models.Model):
         return reverse('codelab:codelab',args=[self.id])
 
 
-class CodelabDetail(models.Model):
-    user_id = models.CharField(max_length=50)
-    user_name = models.CharField(max_length=50)
-    user_email = models.EmailField(max_length=50)
+class CodelabDetail(CommonInfo):
     codelab = models.ForeignKey('Codelab',
                                 related_name='codelab_codelab_set',
                                 on_delete=models.PROTECT,
@@ -39,8 +33,6 @@ class CodelabDetail(models.Model):
     title = models.CharField(max_length=100)
     contents = models.TextField()
     slug = models.SlugField(max_length=200, unique=True, allow_unicode=True)
-    idate = models.DateTimeField(auto_now_add=True)
-    mdate = models.DateTimeField(auto_now=True)
 
     class Meta:
         db_table = 'codelab_detail'
