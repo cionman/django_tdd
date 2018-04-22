@@ -6,6 +6,7 @@ from conf.settings.base import CONTENT_TYPES, MAX_UPLOAD_SIZE
 
 
 class RestrictImageFileForm(forms.ModelForm):
+    """Image 파일 업로드 제한 Form"""
 
     def check_image(self, key):
         content = self.cleaned_data[key]
@@ -28,6 +29,7 @@ class RestrictImageFileForm(forms.ModelForm):
 
 
 class DefaultSetUserForm(forms.ModelForm):
+    """기본 유저 정보 Form"""
 
     class Meta:
         fields = ['user_id', 'user_name', 'user_email']

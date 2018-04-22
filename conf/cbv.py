@@ -6,12 +6,15 @@ from accounts.models import Profile
 
 
 def is_check_writer(user):
+    """Writer 권한 체크"""
     return user.is_authenticated and len(
         Profile.objects.filter(user_id=user.id, is_writer=True)) == 1
 
 
 @method_decorator(user_passes_test(is_check_writer), name='dispatch')
 class WriterCreateView(CreateView):
+    """Writer 권한 체크하는 CreateView"""
+
     def post(self, request, *args, **kwargs):
         request.POST = request.POST.copy() # immutable 해제
         request.POST['user_id'] = request.user.id
@@ -22,4 +25,5 @@ class WriterCreateView(CreateView):
 
 @method_decorator(user_passes_test(is_check_writer), name='dispatch')
 class WriterUpdateView(UpdateView):
+    """Writer 권한 체크하는 UpdateView"""
     pass
