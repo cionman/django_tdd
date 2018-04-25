@@ -1,18 +1,16 @@
-
 var elContents = document.getElementById('id_contents')
 var elConentsMarkdown = document.getElementById('id_contents_markdown')
 
-var editor = tui.Editor.factory({
-    el: document.getElementById('editSection'),
+var editor = $('#editSection').tuiEditor({
     initialEditType: 'markdown',
-    initialValue : elConentsMarkdown.value,
-    language:'ko-kr',
     previewStyle: 'vertical',
-    height: 300,
+    initialValue: elConentsMarkdown.value,
+    height: 'auto',
     events: {
         change: function(e) {
-            elContents.value = editor.preview.getHTML()
-            elConentsMarkdown.value = editor.getValue()
+            var markdown = editor.data('tuiEditor').getMarkdown();
+            elContents.value = editor.data('tuiEditor').convertor.toHTML(markdown)
+            elConentsMarkdown.value = markdown;
         }
     }
 });

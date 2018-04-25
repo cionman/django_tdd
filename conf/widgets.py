@@ -26,5 +26,5 @@ class SingleToastUIEditorWidget(forms.Textarea):
 
     def build_attrs(self, *args, **kwargs):
         attrs = super().build_attrs(*args, **kwargs)
-        attrs['style'] = 'display: none;'
+        attrs['style'] = 'display:none'
         return attrs
