@@ -1,8 +1,14 @@
 {% extends 'layout/layout.html' %}
+{% block customcss %}
+  {{ form.media.css }}
+{% endblock %}
 {% block contents %}
     <form action="" method="post">
         {% csrf_token %}
         <table>{{ form.as_table }}</table>
         <input type="submit" />
     </form>
+{% endblock %}
+{% block customjs %}
+    {{ form.media.js }}
 {% endblock %}
