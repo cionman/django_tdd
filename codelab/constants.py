@@ -16,6 +16,7 @@ class Constant:
     TEST_CODELAB_DATA_DESC = "First Codelab Desc"
     TEST_CODELAB_DETAIL_DATA_TITLE = "First Codelab Detail Title"
     TEST_CODELAB_DETAIL_DATA_CONTENTS = "First Codelab Detail Contents"
+    TEST_CODELAB_DETAIL_DATA_CONTENTS_MARKDOWN = "First Codelab Detail Contents Markdown"
     TEST_CODELAB_DETAIL_DATA_SLUG = "first-slug"
     TEST_UPDATE_CODELAB_DATA_TITLE = "Update Codelab Title"
     TEST_UPDATE_CODELAB_DATA_DESC = "Update Codelab DESC"

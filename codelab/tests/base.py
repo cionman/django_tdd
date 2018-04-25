@@ -61,6 +61,7 @@ class CodelabViewBaseTest(TestCase):
             "codelab": 1,
             "title": Constant.TEST_CODELAB_DETAIL_DATA_TITLE,
             "contents": Constant.TEST_CODELAB_DETAIL_DATA_CONTENTS,
+            "contents_markdown" : Constant.TEST_CODELAB_DETAIL_DATA_CONTENTS_MARKDOWN,
             "slug": Constant.TEST_CODELAB_DETAIL_DATA_SLUG,
         }
         super().setUp()

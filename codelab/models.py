@@ -32,6 +32,7 @@ class CodelabDetail(CommonInfo):
                                 )
     title = models.CharField(max_length=100)
     contents = models.TextField()
+    contents_markdown = models.TextField()
     slug = models.SlugField(max_length=200, unique=True, allow_unicode=True)
 
     class Meta:

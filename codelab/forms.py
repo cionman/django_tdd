@@ -14,9 +14,10 @@ class CodelabForm(RestrictImageFileForm, DefaultSetUserForm):
 class CodelabDetailForm(DefaultSetUserForm):
     class Meta(DefaultSetUserForm.Meta):
         model = CodelabDetail
-        fields = ['codelab','title', 'contents', 'slug'] + DefaultSetUserForm.Meta.fields
+        fields = ['codelab','title', 'contents','contents_markdown', 'slug'] + DefaultSetUserForm.Meta.fields
         widgets = {
             'contents' : SingleToastUIEditorWidget,
+            'contents_markdown' : forms.HiddenInput,
             'user_id': forms.HiddenInput,
             'user_name': forms.HiddenInput,
             'user_email': forms.HiddenInput,
