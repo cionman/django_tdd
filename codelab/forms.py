@@ -7,7 +7,7 @@ from conf.forms import RestrictImageFileForm, DefaultSetUserForm
 class CodelabForm(RestrictImageFileForm, DefaultSetUserForm):
     class Meta(DefaultSetUserForm.Meta):
         model = Codelab
-        fields = ['title', 'image', 'desc', 'isview'] + DefaultSetUserForm.Meta.fields
+        fields = ['title', 'image', 'desc', 'isview', 'category'] + DefaultSetUserForm.Meta.fields
 
 
 class CodelabDetailForm(DefaultSetUserForm):

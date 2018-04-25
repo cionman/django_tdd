@@ -5,6 +5,7 @@ from django.test import TestCase
 
 from accounts.models import Profile
 from codelab.constants import Constant
+from codelab.models import CodelabCategory
 from conf.settings.base import BASE_DIR
 
 
@@ -45,6 +46,8 @@ class CodelabViewBaseTest(TestCase):
                 **Constant.NOT_WRITER_CREDENTIALS)
             Profile.objects.create(user=not_writer_user, is_writer=False,
                                    is_admin=False)
+
+        CodelabCategory.objects.create(category_name='파이썬')
         super().setUpClass()
 
     def setUp(self):
@@ -52,6 +55,7 @@ class CodelabViewBaseTest(TestCase):
             "title": Constant.TEST_CODELAB_DATA_TITLE,
             "desc": Constant.TEST_CODELAB_DATA_DESC,
             "isview": False,
+            "category" : 1,
         }
         self.codelab_detail_data = {
             "codelab": 1,
