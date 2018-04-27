@@ -6,19 +6,16 @@ from conf.widgets import SingleToastUIEditorWidget
 
 
 class CodelabForm(RestrictImageFileForm, DefaultSetUserForm):
-    class Meta(DefaultSetUserForm.Meta):
+    class Meta:
         model = Codelab
-        fields = ['title', 'image', 'desc', 'isview', 'category'] + DefaultSetUserForm.Meta.fields
+        fields = ['title', 'image', 'desc', 'isview', 'category']
 
 
 class CodelabDetailForm(DefaultSetUserForm):
-    class Meta(DefaultSetUserForm.Meta):
+    class Meta:
         model = CodelabDetail
-        fields = ['codelab','title', 'contents','contents_markdown', 'slug'] + DefaultSetUserForm.Meta.fields
+        fields = ['codelab','title', 'contents','contents_markdown', 'slug']
         widgets = {
             'contents' : SingleToastUIEditorWidget,
             'contents_markdown' : forms.HiddenInput,
-            'user_id': forms.HiddenInput,
-            'user_name': forms.HiddenInput,
-            'user_email': forms.HiddenInput,
         }

@@ -27,16 +27,12 @@ class RestrictImageFileForm(forms.ModelForm):
 class DefaultSetUserForm(forms.ModelForm):
     """기본 유저 정보 Form"""
 
-    class Meta:
-        fields = ['user_id', 'user_name', 'user_email']
-        widgets = {
-            'user_id': forms.HiddenInput,
-            'user_name': forms.HiddenInput,
-            'user_email': forms.HiddenInput,
-        }
-
-    def __init__(self, *args, **kwargs):
+    def __init__(self, user, *args, **kwargs):
         super(DefaultSetUserForm, self).__init__(*args, **kwargs)
-        self.fields['user_id'].required = False
-        self.fields['user_name'].required = False
-        self.fields['user_email'].required = False
+        self.user = user
+
+    def save(self, commit=True):
+        self.instance.user_id = self.user.id
+        self.instance.user_name = self.user.username
+        self.instance.user_email = self.user.email
+        return super().save(commit)
