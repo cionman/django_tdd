@@ -2,7 +2,7 @@ from django import forms
 from django.forms import ImageField
 from django.template.defaultfilters import filesizeformat
 
-from conf.settings.base import CONTENT_TYPES, MAX_UPLOAD_SIZE
+from conf.settings.base import MAX_UPLOAD_SIZE
 
 
 class RestrictImageFileForm(forms.ModelForm):
@@ -10,15 +10,11 @@ class RestrictImageFileForm(forms.ModelForm):
 
     def check_image(self, key):
         content = self.cleaned_data.get(key, None)
-        content_type =content.content_type.split('/')[0]  if content else None
-        if content_type in CONTENT_TYPES:
-            if content._size > MAX_UPLOAD_SIZE:
-                raise forms.ValidationError(
-                    ('최대 파일사이즈는 %s 입니다. 현재 파일사이즈는 %s 입니다.') % (
-                        filesizeformat(MAX_UPLOAD_SIZE),
-                        filesizeformat(content._size)))
-        else:
-            raise forms.ValidationError(('File type을 지원하지 않습니다.'))
+        if content is not None and content.size > MAX_UPLOAD_SIZE:
+            raise forms.ValidationError(
+                ('최대 파일사이즈는 %s 입니다. 현재 파일사이즈는 %s 입니다.') % (
+                    filesizeformat(MAX_UPLOAD_SIZE),
+                    filesizeformat(content._size)))
         return content
 
     def clean(self):

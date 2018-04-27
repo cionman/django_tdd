@@ -44,7 +44,19 @@ class CodelabViewPostTest(CodelabViewBaseTest):
             self.assertEqual(Codelab.objects.first().title,
                              Constant.TEST_UPDATE_CODELAB_DATA_TITLE)
 
+    def test_update_codelab_without_modify_image(self):
+        """codelab 이미지 없이 수정 업데이트"""
+
+        self.login_and_insert_codelab_with_default_data()
+        del self.codelab_data["image"]
+        self.codelab_data["title"] = Constant.TEST_UPDATE_CODELAB_DATA_TITLE
+        self.client.post('/codelab/update/1/', data=self.codelab_data)
+        self.assertEqual(Codelab.objects.first().title,
+                         Constant.TEST_UPDATE_CODELAB_DATA_TITLE)
+
+
     def test_update_codelab_detail(self):
+        """codelab detail  수정 업데이트"""
         self.login_and_insert_codelab_with_default_data()
         self.insert_codelab_detail()
         self.codelab_detail_data[
@@ -78,7 +90,7 @@ class CodelabViewPostTest(CodelabViewBaseTest):
             self.codelab_data["image"] = image
             response = self.client.post('/codelab/new/', data=self.codelab_data)
             self.assertIn(
-                '<ul class="errorlist nonfield"><li>File type을 지원하지 않습니다.</li>',
+                '<ul class="errorlist"><li>올바른 이미지를 업로드하세요. 업로드하신 파일은 이미지 파일이 아니거나 파일이 깨져 있습니다.',
                 response.content.decode())
 
     def test_codelab_empty_title(self):
