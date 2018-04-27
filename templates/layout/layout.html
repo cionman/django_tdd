@@ -14,5 +14,14 @@
 {% include "../include/js.html" %}
 {% block customjs %}
 {% endblock %}
+{% if messages %}
+    <script>
+    {% for message in messages %}
+        {% if message.level >= DEFAULT_MESSAGE_LEVELS.WARNING  %}
+        alert('{{ message }}');
+        {% endif %}
+    {% endfor %}
+    </script>
+{% endif %}
 </body>
 </html>
