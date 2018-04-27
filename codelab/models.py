@@ -1,13 +1,21 @@
 from django.db import models
 from django.urls import reverse
+from imagekit.models import ImageSpecField
+from pilkit.processors import ResizeToFit
 
 from conf.models import CommonInfo
 
 
 class Codelab(CommonInfo):
     title = models.CharField(max_length=100)
-    image = models.ImageField(upload_to='codelab/%Y/%m/%d'
-                              , help_text='대표이미지를 선택해주세요.')
+    image = models.ImageField(upload_to='codelab/%Y/%m/%d',
+                                help_text='대표이미지를 선택해주세요.')
+    image_thumb = ImageSpecField(
+        source='image',
+        processors=[ResizeToFit(400, 400)],  # 처리할 작업목록
+        format='JPEG',
+        options={'quality': 80},
+    )
     desc = models.CharField(max_length=200)
     favorite = models.IntegerField(default=0)
     isview = models.BooleanField(default=True)
@@ -22,7 +30,7 @@ class Codelab(CommonInfo):
         return self.title
 
     def get_absolute_url(self):
-        return reverse('codelab:codelab',args=[self.id])
+        return reverse('codelab:codelab', args=[self.id])
 
 
 class CodelabDetail(CommonInfo):
@@ -44,7 +52,7 @@ class CodelabDetail(CommonInfo):
                                 self.contents)
 
     def get_absolute_url(self):
-        return reverse('codelab:codelab_detail',args=[self.slug])
+        return reverse('codelab:codelab_detail', args=[self.slug])
 
 
 class CodelabCategory(models.Model):

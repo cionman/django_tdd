@@ -1,10 +1,18 @@
 from django.db import models
+from imagekit.models import ImageSpecField
+from pilkit.processors import ResizeToFit
 
 
 class Toy(models.Model):
     title = models.CharField(max_length=100)
     toy_image = models.ImageField(upload_to='toy/%Y/%m/%d', null=True,
                                   blank=True)
+    image_thumb = ImageSpecField(
+        source='toy_image',
+        processors=[ResizeToFit(400, 400)],  # 처리할 작업목록
+        format='JPEG',
+        options={'quality': 80},
+    )
     tech_stack = models.ManyToManyField('TechStack',
                                         related_name='toy_techstack_set',
                                         null=True, blank=True)

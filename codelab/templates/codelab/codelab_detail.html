@@ -2,7 +2,7 @@
 {% load static %}
 {% block contents %}
 <h1>{{ codelab.title }}</h1>
-<img src="/media/{{ codelab.image }}" alter="코드랩 메인이미지"/>
+<img src="{{ codelab.image_thumb.url}}" alter="코드랩 메인이미지"/>
 <p>
     설명 : {{ codelab.desc }}
 </p>
