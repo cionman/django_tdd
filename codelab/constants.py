@@ -3,13 +3,19 @@ class Constant:
     CREDENTIALS = {
         'username': 'testuser',
         'password': 'secret',
-        'email': 'ttttaaa@abc.com'
+        'email': 'ttttaaa@abc.com',
     }
 
     NOT_WRITER_CREDENTIALS = {
         'username': 'testuser2',
         'password': 'secret2',
-        'email': 'ttttaaa2@abc.com'
+        'email': 'ttttaaa2@abc.com',
+    }
+
+    OTHER_CREDENTIALS = {
+        'username': 'testuser3',
+        'password': 'secret3',
+        'email': 'ttttaaa3@abc.com',
     }
 
     TEST_CODELAB_DATA_TITLE = "First Codelab Title"

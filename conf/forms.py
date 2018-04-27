@@ -40,4 +40,3 @@ class DefaultSetUserForm(forms.ModelForm):
         self.fields['user_id'].required = False
         self.fields['user_name'].required = False
         self.fields['user_email'].required = False
-

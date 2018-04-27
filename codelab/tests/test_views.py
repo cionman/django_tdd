@@ -27,7 +27,6 @@ class CodelabViewPostTest(CodelabViewBaseTest):
 
         self.login_and_insert_codelab_with_default_data()
         self.insert_codelab_detail()
-
         new_codelab_detail = CodelabDetail.objects.first()
         self.assertEqual(new_codelab_detail.title,
                          Constant.TEST_CODELAB_DETAIL_DATA_TITLE)
@@ -48,12 +47,12 @@ class CodelabViewPostTest(CodelabViewBaseTest):
         """codelab 이미지 없이 수정 업데이트"""
 
         self.login_and_insert_codelab_with_default_data()
+
         del self.codelab_data["image"]
         self.codelab_data["title"] = Constant.TEST_UPDATE_CODELAB_DATA_TITLE
         self.client.post('/codelab/update/1/', data=self.codelab_data)
         self.assertEqual(Codelab.objects.first().title,
                          Constant.TEST_UPDATE_CODELAB_DATA_TITLE)
-
 
     def test_update_codelab_detail(self):
         """codelab detail  수정 업데이트"""
@@ -183,6 +182,31 @@ class CodelabViewPostTest(CodelabViewBaseTest):
         self.insert_codelab_detail()
         self.assertEqual(CodelabDetail.objects.count(), 0)
 
+    def test_not_owner_update_codelab(self):
+        """자신의 codelab 글이 아닌 경우 수정 시도"""
+
+        self.login_and_insert_codelab_with_default_data()
+        self.other_writer_login()
+        del self.codelab_data["image"]
+        self.codelab_data["title"] = Constant.TEST_UPDATE_CODELAB_DATA_TITLE
+        self.client.post('/codelab/update/1/', data=self.codelab_data)
+        self.assertNotEqual(Codelab.objects.first().title,
+                            Constant.TEST_UPDATE_CODELAB_DATA_TITLE)
+
+    def test_not_owner_update_codelab_detail(self):
+        """자신의 codelab detail 글이 아닌 경우 수정 시도"""
+
+        self.login_and_insert_codelab_with_default_data()
+        self.insert_codelab_detail()
+        self.other_writer_login()
+        self.codelab_detail_data[
+            "title"] = Constant.TEST_UPDATE_CODELAB_DATA_TITLE
+        self.client.post('/codelab/update/{}/'.format(
+            Constant.TEST_CODELAB_DETAIL_DATA_SLUG),
+            data=self.codelab_detail_data)
+        self.assertNotEqual(CodelabDetail.objects.first().title,
+                            Constant.TEST_UPDATE_CODELAB_DATA_TITLE)
+
 
 class CodelabViewLoadTest(CodelabViewBaseTest):
     """기본 화면 로드 테스트, 로그인 하지 않았을 시 테스트"""
@@ -252,16 +276,18 @@ class CodelabViewLoadTest(CodelabViewBaseTest):
         self.login_and_insert_codelab_with_default_data()
         self.client.post('/accounts/logout/')
         response = self.client.get('/codelab/update/1/')
-        self.assertEqual("/accounts/login/?next=/codelab/update/1/", response.url)
+        self.assertEqual("/accounts/login/?next=/codelab/update/1/",
+                         response.url)
 
     def test_not_login_update_codelab_detail(self):
         self.login_and_insert_codelab_with_default_data()
         self.insert_codelab_detail()
         self.client.post('/accounts/logout/')
-        response = self.client.get('/codelab/update/{}/'.format(Constant.TEST_CODELAB_DETAIL_DATA_SLUG))
-        self.assertEqual("/accounts/login/?next=/codelab/update/{}/".format(Constant.TEST_CODELAB_DETAIL_DATA_SLUG)
-                         , response.url)
-
+        response = self.client.get('/codelab/update/{}/'.format(
+            Constant.TEST_CODELAB_DETAIL_DATA_SLUG))
+        self.assertEqual("/accounts/login/?next=/codelab/update/{}/".format(
+            Constant.TEST_CODELAB_DETAIL_DATA_SLUG)
+            , response.url)
 
     def test_not_writer_create_codelab(self):
         self.not_writer_login()
@@ -273,6 +299,32 @@ class CodelabViewLoadTest(CodelabViewBaseTest):
         response = self.client.get('/codelab/new/detail/')
         self.assertEqual("/accounts/login/?next=/codelab/new/detail/",
                          response.url)
+
+    def test_not_owner_update_codelab(self):
+        """자신의 codelab 글이 아닌 경우 수정 화면 접근"""
+
+        self.login_and_insert_codelab_with_default_data()
+        self.other_writer_login()
+        del self.codelab_data["image"]
+        self.codelab_data["title"] = Constant.TEST_UPDATE_CODELAB_DATA_TITLE
+        response = self.client.get('/codelab/update/1/', data=self.codelab_data)
+        self.assertEqual("/codelab/1/",
+                         response.url)
+
+    def test_not_owner_update_codelab_detail(self):
+        """자신의 codelab detail 글이 아닌 경우 수정 화면 접근"""
+
+        self.login_and_insert_codelab_with_default_data()
+        self.insert_codelab_detail()
+        self.other_writer_login()
+        self.codelab_detail_data[
+            "title"] = Constant.TEST_UPDATE_CODELAB_DATA_TITLE
+        response = self.client.get('/codelab/update/{}/'.format(
+            Constant.TEST_CODELAB_DETAIL_DATA_SLUG),
+            data=self.codelab_detail_data)
+        self.assertEqual("/codelab/{}/".format(
+            Constant.TEST_CODELAB_DETAIL_DATA_SLUG)
+            , response.url)
 
 
 class CodelabViewCheckFormTest(CodelabViewBaseTest):

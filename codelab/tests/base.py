@@ -19,10 +19,14 @@ class CodelabViewBaseTest(TestCase):
         self.client.post('/accounts/login/', Constant.NOT_WRITER_CREDENTIALS,
                          follow=True)
 
+    def other_writer_login(self):
+        self.client.post('/accounts/login/', Constant.OTHER_CREDENTIALS,
+                         follow=True)
+
     def insert_codelab(self, data):
         response = self.client.post('/codelab/new/', data=data)
 
-    def login_and_insert_codelab_with_default_data(self, is_writer = True):
+    def login_and_insert_codelab_with_default_data(self, is_writer=True):
         if is_writer:
             self.writer_login()
         else:
@@ -40,11 +44,16 @@ class CodelabViewBaseTest(TestCase):
     @classmethod
     def setUpClass(cls):
         if User.objects.count() == 0:
-            user = User.objects.create_user(**Constant.CREDENTIALS)
-            Profile.objects.create(user=user, is_writer=True, is_admin=False)
-            not_writer_user = User.objects.create_user(
+            cls.user = User.objects.create_user(**Constant.CREDENTIALS)
+            Profile.objects.create(user=cls.user, is_writer=True, is_admin=False)
+
+            cls.not_writer_user = User.objects.create_user(
                 **Constant.NOT_WRITER_CREDENTIALS)
-            Profile.objects.create(user=not_writer_user, is_writer=False,
+            Profile.objects.create(user=cls.not_writer_user, is_writer=False,
+                                   is_admin=False)
+
+            cls.other_user = User.objects.create_user(**Constant.OTHER_CREDENTIALS)
+            Profile.objects.create(user=cls.other_user, is_writer=True,
                                    is_admin=False)
 
         CodelabCategory.objects.create(category_name='파이썬')
@@ -55,13 +64,13 @@ class CodelabViewBaseTest(TestCase):
             "title": Constant.TEST_CODELAB_DATA_TITLE,
             "desc": Constant.TEST_CODELAB_DATA_DESC,
             "isview": False,
-            "category" : 1,
+            "category": 1,
         }
         self.codelab_detail_data = {
             "codelab": 1,
             "title": Constant.TEST_CODELAB_DETAIL_DATA_TITLE,
             "contents": Constant.TEST_CODELAB_DETAIL_DATA_CONTENTS,
-            "contents_markdown" : Constant.TEST_CODELAB_DETAIL_DATA_CONTENTS_MARKDOWN,
+            "contents_markdown": Constant.TEST_CODELAB_DETAIL_DATA_CONTENTS_MARKDOWN,
             "slug": Constant.TEST_CODELAB_DETAIL_DATA_SLUG,
         }
         super().setUp()
