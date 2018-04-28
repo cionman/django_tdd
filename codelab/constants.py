@@ -18,8 +18,14 @@ class Constant:
         'email': 'ttttaaa3@abc.com',
     }
 
+    TEST_CODELAB_DATA_USER_ID = 1
+    TEST_CODELAB_DATA_USER_NAME = "TEST_USER_NAME"
+    TEST_CODELAB_DATA_USER_EMAIL = "test@test.com"
     TEST_CODELAB_DATA_TITLE = "First Codelab Title"
+    TEST_CODELAB_DATA_IMAGE = "image.png"
     TEST_CODELAB_DATA_DESC = "First Codelab Desc"
+    TEST_CODELAB_DATA_ISVIEW = False
+    TEST_CODELAB_DATA_CATEGORY = "python"
     TEST_CODELAB_DETAIL_DATA_TITLE = "First Codelab Detail Title"
     TEST_CODELAB_DETAIL_DATA_CONTENTS = "First Codelab Detail Contents"
     TEST_CODELAB_DETAIL_DATA_CONTENTS_MARKDOWN = "First Codelab Detail Contents Markdown"

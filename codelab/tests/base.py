@@ -5,7 +5,7 @@ from django.test import TestCase
 
 from accounts.models import Profile
 from codelab.constants import Constant
-from codelab.models import CodelabCategory
+from codelab.models import CodelabCategory, Codelab, CodelabDetail
 from conf.settings.base import BASE_DIR
 
 
@@ -74,3 +74,39 @@ class CodelabViewBaseTest(TestCase):
             "slug": Constant.TEST_CODELAB_DETAIL_DATA_SLUG,
         }
         super().setUp()
+
+
+class CodelabModelBaseTest(TestCase):
+
+    def setUp(self):
+        CodelabCategory(category_name=Constant.TEST_CODELAB_DATA_CATEGORY).save()
+
+        self.codelab_data = {
+            "user_id" : Constant.TEST_CODELAB_DATA_USER_ID,
+            "user_name": Constant.TEST_CODELAB_DATA_USER_NAME,
+            "user_email": Constant.TEST_CODELAB_DATA_USER_EMAIL,
+            "title": Constant.TEST_CODELAB_DATA_TITLE,
+            "image": Constant.TEST_CODELAB_DATA_IMAGE,
+            "desc": Constant.TEST_CODELAB_DATA_DESC,
+            "isview": Constant.TEST_CODELAB_DATA_ISVIEW,
+            "category": CodelabCategory.objects.first() ,
+        }
+        self.codelab_detail_data ={
+            "user_id": Constant.TEST_CODELAB_DATA_USER_ID,
+            "user_name": Constant.TEST_CODELAB_DATA_USER_NAME,
+            "user_email": Constant.TEST_CODELAB_DATA_USER_EMAIL,
+            "title": Constant.TEST_CODELAB_DETAIL_DATA_TITLE,
+            "contents": Constant.TEST_CODELAB_DETAIL_DATA_CONTENTS,
+            "contents_markdown": Constant.TEST_CODELAB_DETAIL_DATA_CONTENTS_MARKDOWN,
+            "slug": Constant.TEST_CODELAB_DETAIL_DATA_SLUG,
+        }
+        super().setUp()
+
+    def save_codelab(self):
+        return Codelab.objects.create(**self.codelab_data)
+
+    def save_codelab_detail(self):
+        codelab = self.save_codelab()
+        self.codelab_detail_data["codelab"] = codelab
+        return CodelabDetail.objects.create(**self.codelab_detail_data)
+
