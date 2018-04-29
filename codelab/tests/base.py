@@ -43,15 +43,17 @@ class CodelabViewBaseTest(TestCase):
 
     @classmethod
     def setUpClass(cls):
-        if User.objects.count() == 0:
+        if not User.objects.filter(username=Constant.CREDENTIALS["username"]).count():
             cls.user = User.objects.create_user(**Constant.CREDENTIALS)
             Profile.objects.create(user=cls.user, is_writer=True, is_admin=False)
 
+        if not User.objects.filter(username=Constant.NOT_WRITER_CREDENTIALS["username"]).count():
             cls.not_writer_user = User.objects.create_user(
                 **Constant.NOT_WRITER_CREDENTIALS)
             Profile.objects.create(user=cls.not_writer_user, is_writer=False,
                                    is_admin=False)
 
+        if not User.objects.filter(username=Constant.OTHER_CREDENTIALS["username"]).count():
             cls.other_user = User.objects.create_user(**Constant.OTHER_CREDENTIALS)
             Profile.objects.create(user=cls.other_user, is_writer=True,
                                    is_admin=False)
