@@ -24,6 +24,8 @@ INSTALLED_APPS = [
     'allauth.socialaccount.providers.github',
     # sentry추가
     'raven.contrib.django.raven_compat',
+    # django rest framework
+    'rest_framework',
     # 추가 앱
     'codelab',
     'til',
