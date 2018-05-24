@@ -89,7 +89,7 @@ class CodelabViewPostTest(CodelabViewBaseTest):
             self.codelab_data["image"] = image
             response = self.client.post('/codelab/new/', data=self.codelab_data)
             self.assertIn(
-                '<ul class="errorlist"><li>올바른 이미지를 업로드하세요. 업로드하신 파일은 이미지 파일이 아니거나 파일이 깨져 있습니다.',
+                '<ul class="errorlist"><li>유효한 이미지 파일을 업로드 하십시오.',
                 response.content.decode())
 
     def test_codelab_empty_title(self):
