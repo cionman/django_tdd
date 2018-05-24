@@ -31,6 +31,7 @@ INSTALLED_APPS = [
     'til',
     'toy',
     'accounts',
+    'api',
 ]
 
 MIDDLEWARE = [
